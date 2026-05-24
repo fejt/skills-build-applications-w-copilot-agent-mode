@@ -12,7 +12,7 @@ const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/octofit_db
 // Codespaces-aware API base URL. If running inside a Codespace, construct the
 // preview hostname so frontend can call the API through the preview URL.
 const CODESPACE = process.env.CODESPACE_NAME;
-const API_BASE = CODESPACE ? `https://${CODESPACE}-8000.githubpreview.dev` : `http://localhost:${PORT}`;
+const API_BASE = CODESPACE ? `https://${CODESPACE}-8000.app.github.dev` : `http://localhost:${PORT}`;
 
 app.use(express.json());
 
