@@ -27,7 +27,7 @@ app.get('/api', (req, res) => {
   res.json({ status: 'ok', apiBase: API_BASE, env: process.env.NODE_ENV || 'development' });
 });
 
-import connectDatabase from './database';
+import connectDatabase from './config/database';
 
 async function start() {
   try {
