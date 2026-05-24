@@ -6,10 +6,15 @@ function Workouts() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
+  const CODESPACE_NAME = import.meta.env.VITE_CODESPACE_NAME
+  const WORKOUTS_ENDPOINT = CODESPACE_NAME
+    ? `https://${CODESPACE_NAME}-8000.app.github.dev/api/workouts/`
+    : `${API_BASE}/workouts/`
+
   useEffect(() => {
     async function loadWorkouts() {
       try {
-        const response = await fetch(`${API_BASE}/workouts/`)
+        const response = await fetch(WORKOUTS_ENDPOINT)
         if (!response.ok) {
           throw new Error(`Failed to load workouts: ${response.status}`)
         }

@@ -6,10 +6,15 @@ function Leaderboard() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
+  const CODESPACE_NAME = import.meta.env.VITE_CODESPACE_NAME
+  const LEADERBOARD_ENDPOINT = CODESPACE_NAME
+    ? `https://${CODESPACE_NAME}-8000.app.github.dev/api/leaderboard/`
+    : `${API_BASE}/leaderboard/`
+
   useEffect(() => {
     async function loadLeaderboard() {
       try {
-        const response = await fetch(`${API_BASE}/leaderboard/`)
+        const response = await fetch(LEADERBOARD_ENDPOINT)
         if (!response.ok) {
           throw new Error(`Failed to load leaderboard: ${response.status}`)
         }

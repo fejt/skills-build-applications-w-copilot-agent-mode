@@ -6,10 +6,15 @@ function Users() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
+  const CODESPACE_NAME = import.meta.env.VITE_CODESPACE_NAME
+  const USERS_ENDPOINT = CODESPACE_NAME
+    ? `https://${CODESPACE_NAME}-8000.app.github.dev/api/users/`
+    : `${API_BASE}/users/`
+
   useEffect(() => {
     async function loadUsers() {
       try {
-        const response = await fetch(`${API_BASE}/users/`)
+        const response = await fetch(USERS_ENDPOINT)
         if (!response.ok) {
           throw new Error(`Failed to load users: ${response.status}`)
         }

@@ -6,10 +6,15 @@ function Activities() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
+  const CODESPACE_NAME = import.meta.env.VITE_CODESPACE_NAME
+  const ACTIVITIES_ENDPOINT = CODESPACE_NAME
+    ? `https://${CODESPACE_NAME}-8000.app.github.dev/api/activities/`
+    : `${API_BASE}/activities/`
+
   useEffect(() => {
     async function loadActivities() {
       try {
-        const response = await fetch(`${API_BASE}/activities/`)
+        const response = await fetch(ACTIVITIES_ENDPOINT)
         if (!response.ok) {
           throw new Error(`Failed to load activities: ${response.status}`)
         }

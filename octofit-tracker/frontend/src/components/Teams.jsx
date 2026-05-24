@@ -6,10 +6,15 @@ function Teams() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
+  const CODESPACE_NAME = import.meta.env.VITE_CODESPACE_NAME
+  const TEAMS_ENDPOINT = CODESPACE_NAME
+    ? `https://${CODESPACE_NAME}-8000.app.github.dev/api/teams/`
+    : `${API_BASE}/teams/`
+
   useEffect(() => {
     async function loadTeams() {
       try {
-        const response = await fetch(`${API_BASE}/teams/`)
+        const response = await fetch(TEAMS_ENDPOINT)
         if (!response.ok) {
           throw new Error(`Failed to load teams: ${response.status}`)
         }
