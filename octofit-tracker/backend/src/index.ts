@@ -1,6 +1,4 @@
 import express from 'express';
-import mongoose from 'mongoose';
-
 import usersRouter from './routes/users';
 import teamsRouter from './routes/teams';
 import activitiesRouter from './routes/activities';
@@ -29,9 +27,11 @@ app.get('/api', (req, res) => {
   res.json({ status: 'ok', apiBase: API_BASE, env: process.env.NODE_ENV || 'development' });
 });
 
+import connectDatabase from './database';
+
 async function start() {
   try {
-    await mongoose.connect(MONGO_URI);
+    await connectDatabase(MONGO_URI);
     console.log('Connected to MongoDB');
 
     app.listen(PORT, '0.0.0.0', () => {
